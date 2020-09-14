@@ -1,0 +1,96 @@
+execute pathogen#infect()
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='papercolor'
+let g:airline_powerline_fonts = 1
+let g:vim_markdown_folding_disabled = 1
+
+if $PUTTY_MODE == "DARK"
+    set background=dark
+else
+    set background=light
+endif
+
+if has('gui_running')
+    set guifont=Hack\ 9
+    set guioptions-=L
+endif
+
+colorscheme solarized
+
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+set autoindent
+set cursorline
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set hidden
+set history=1000
+set ignorecase
+set incsearch
+set iskeyword-=:
+"set mouse=a
+set noerrorbells
+set number
+"set relativenumber
+set ruler
+set showcmd
+set showmatch
+set smartcase
+set undolevels=1000
+set vb
+
+syntax on
+filetype plugin indent on
+set ts=4
+set shiftwidth=4
+set softtabstop=4
+set formatoptions-=cro
+
+autocmd FileType perl set tabstop=4|set shiftwidth=4|set softtabstop=4
+autocmd FileType python set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
+autocmd FileType javascript set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
+autocmd FileType typescript set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
+
+nnoremap <C-H> :Hexmode<CR>
+inoremap <C-H> <Esc>:Hexmode<CR>
+vnoremap <C-H> <C-U>:Hexmode<CR>
+
+nnoremap <C-N><C-N> :NERDTreeToggle<CR>
+nnoremap <C-N><C-G> :NERDTreeFind<CR>
+nnoremap <C-N><C-W> :NERDTreeCWD<CR>
+
+nnoremap <C-L><C-L> :set number!<CR>:set relativenumber!<CR>
+
+command -bar Hexmode call ToggleHex()
+let jshint2_command='/usr/bin/jshint'
+
+function ToggleHex()
+    let l:modified=&mod
+    let l:oldreadonly=&readonly
+    let &readonly=0
+    let l:oldmodifiable=&modifiable
+    let &modifiable=1
+    if !exists("b:editHex") || !b:editHex
+        let b:oldft=&ft
+        let b:oldbin=&bin
+        setlocal binary
+        silent :e
+
+        let &ft="xxd"
+        let b:editHex=1
+        %!xxd
+    else
+        let &ft=b:oldft
+        if !b:oldbin
+            setlocal nobinary
+        endif
+        let b:editHex=0
+        %!xxd -r
+    endif
+    let &mod=l:modified
+    let &modifiable=l:oldmodifiable
+endfunction
+

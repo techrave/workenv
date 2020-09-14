@@ -1,0 +1,6 @@
+set editing-mode vi
+TAB: menu-complete
+"\e[Z": menu-complete-backward
+"\e?": possible-completions
+"\C-_": undo
+set completion-ignore-case On

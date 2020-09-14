@@ -1,0 +1,21 @@
+. ~/.bashrc_system
+
+alias l='ls -a'
+alias ll='ls -la'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias vi='vim'
+alias fixdate='sudo ntpdate -sb time.nist.gov'
+
+set -o vi
+export EDITOR=$(which vim)
+export PS1="\[\e[00;33m\]\t\[\e[0m\]\[\e[00;36m\] \[\e[0m\]\[\e[00;36m\]\w\[\e[0m\]\[\e[00;36m\]\n[\[\e[0m\]\[\e[00;32m\]\u\[\e[0m\]\[\e[00;36m\]@\[\e[0m\]\[\e[00;34m\]\h\[\e[0m\]\[\e[00;36m\]] \$? \\$> \[\e[0m\]"
+
+export PATH=$PATH:/sbin:/usr/sbin
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
