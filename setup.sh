@@ -5,8 +5,8 @@ copy-with-backup() {
 	TARGFILE=$2
 
 	if [ -f "$TARGFILE" ]; then
-		MD5SOURCE=$(md5sum $SOURCEFILE | cut -c1-33)
-		MD5TARGET=$(md5sum $TARGFILE | cut -c1-33)
+		MD5SOURCE=$(md5sum "$SOURCEFILE" | cut -c1-33)
+		MD5TARGET=$(md5sum "$TARGFILE" | cut -c1-33)
 		if [ "$MD5SOURCE" == "$MD5TARGET" ]; then
 			return
 		else
@@ -24,12 +24,12 @@ dot-copy() {
 	TARGDIR=$2
 
 	STARTDIR=$(pwd)
-	cd $ORIGDIR
+	cd "$ORIGDIR" || exit
 	for dotfile in dot-*; do
-		targfile=.$(echo $dotfile | cut -c5-)
-		copy-with-backup $dotfile $TARGDIR/$targfile
+		targfile=.$(echo "$dotfile" | cut -c5-)
+		copy-with-backup "$dotfile" "$TARGDIR/$targfile"
 	done
-	cd "$STARTDIR"
+	cd "$STARTDIR" || exit
 }
 
 create-dir() {
@@ -86,5 +86,6 @@ git-clone-or-pull git://github.com/tpope/vim-sensible.git ~/.vim/bundle/vim-sens
 git-clone-or-pull git://github.com/hashivim/vim-terraform.git ~/.vim/bundle/vim-terraform
 git-clone-or-pull git://github.com/tpope/vim-unimpaired.git ~/.vim/bundle/vim-unimpaired
 git-clone-or-pull https://github.com/vim-python/python-syntax.git ~/.vim/bundle/vim-python-syntax
+git-clone-or-pull https://github.com/vim-syntastic/syntastic.git ~/.vim/bundle/syntastic
 
 
