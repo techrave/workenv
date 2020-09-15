@@ -19,3 +19,33 @@ export PATH=$PATH:/sbin:/usr/sbin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -f ~/.bashrc_local ]; then
+	. ~/.bashrc_local
+fi
+
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    ssh-add
+}
+
+# Source SSH settings, if applicable
+
+if [[ $- == *i* ]]
+then
+	if [ -f "${SSH_ENV}" ]; then
+		. "${SSH_ENV}" > /dev/null
+		ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+			start_agent;
+		}
+	else
+		start_agent;
+	fi
+fi
+
