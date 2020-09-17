@@ -1,5 +1,36 @@
 execute pathogen#infect()
 
+function! s:FindProjectFile(fname)
+    return findfile( a:fname, ".;" )
+endfunction
+
+function ToggleHex()
+    let l:modified=&mod
+    let l:oldreadonly=&readonly
+    let &readonly=0
+    let l:oldmodifiable=&modifiable
+    let &modifiable=1
+    if !exists("b:editHex") || !b:editHex
+        let b:oldft=&ft
+        let b:oldbin=&bin
+        setlocal binary
+        silent :e
+
+        let &ft="xxd"
+        let b:editHex=1
+        %!xxd
+    else
+        let &ft=b:oldft
+        if !b:oldbin
+            setlocal nobinary
+        endif
+        let b:editHex=0
+        %!xxd -r
+    endif
+    let &mod=l:modified
+    let &modifiable=l:oldmodifiable
+endfunction
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='papercolor'
 let g:airline_powerline_fonts = 1
@@ -22,6 +53,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = ['npm run lint --']
+let s:pylintrc =  s:FindProjectFile(".pylintrc")
+let g:syntastic_python_pylint_args = "--rcfile=\"" . s:pylintrc . "\""
 
 let NERDTreeShowHidden = 1
 
@@ -92,31 +125,4 @@ nnoremap <C-L><C-L> :set number!<CR>:set relativenumber!<CR>
 
 command -bar Hexmode call ToggleHex()
 let jshint2_command='/usr/bin/jshint'
-
-function ToggleHex()
-    let l:modified=&mod
-    let l:oldreadonly=&readonly
-    let &readonly=0
-    let l:oldmodifiable=&modifiable
-    let &modifiable=1
-    if !exists("b:editHex") || !b:editHex
-        let b:oldft=&ft
-        let b:oldbin=&bin
-        setlocal binary
-        silent :e
-
-        let &ft="xxd"
-        let b:editHex=1
-        %!xxd
-    else
-        let &ft=b:oldft
-        if !b:oldbin
-            setlocal nobinary
-        endif
-        let b:editHex=0
-        %!xxd -r
-    endif
-    let &mod=l:modified
-    let &modifiable=l:oldmodifiable
-endfunction
 
