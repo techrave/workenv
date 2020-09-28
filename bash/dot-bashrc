@@ -6,7 +6,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias vi='vim'
+alias vi='gvim -v'
+alias vim='gvim -v'
+alias view='gvim -v -R'
+alias gview='gvim -R'
 alias fixdate='sudo ntpdate -sb time.nist.gov'
 
 set -o vi

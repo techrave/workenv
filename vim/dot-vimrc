@@ -119,6 +119,7 @@ set undolevels=1000
 set vb
 exec "set listchars=tab:\u2500\u2500\u2512,trail:\uB7,nbsp:~,eol:\u21A9"
 set list
+set clipboard=unnamed
 
 syntax on
 filetype plugin indent on
