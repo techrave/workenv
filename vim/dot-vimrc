@@ -94,7 +94,7 @@ endif
 
 colorscheme solarized
 
-highlight ColorColumn ctermbg=magenta
+highlight ColorColumn ctermbg=13
 call matchadd('ColorColumn', '\%81v', 100)
 
 set autoindent

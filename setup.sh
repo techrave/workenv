@@ -86,6 +86,8 @@ git-clone-or-pull git://github.com/tpope/vim-sensible.git ~/.vim/bundle/vim-sens
 git-clone-or-pull git://github.com/hashivim/vim-terraform.git ~/.vim/bundle/vim-terraform
 git-clone-or-pull git://github.com/tpope/vim-unimpaired.git ~/.vim/bundle/vim-unimpaired
 git-clone-or-pull https://github.com/vim-python/python-syntax.git ~/.vim/bundle/vim-python-syntax
+git-clone-or-pull https://github.com/guns/xterm-color-table.vim.git ~/.vim/bundle/xterm-color-table.vim
 git-clone-or-pull https://github.com/vim-syntastic/syntastic.git ~/.vim/bundle/syntastic
+
 
 
