@@ -129,10 +129,11 @@ set softtabstop=4
 set formatoptions-=cro
 set nofoldenable
 
+autocmd FileType javascript set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
 autocmd FileType perl set tabstop=4|set shiftwidth=4|set softtabstop=4
 autocmd FileType python set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
-autocmd FileType javascript set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
 autocmd FileType typescript set tabstop=2|set shiftwidth=2|set softtabstop=2|set expandtab
+autocmd FileType vim set tabstop=4|set shiftwidth=4|set softtabstop=4|set expandtab
 
 nnoremap <C-H> :Hexmode<CR>
 inoremap <C-H> <Esc>:Hexmode<CR>
