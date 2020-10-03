@@ -14,7 +14,7 @@ if [[ -z "${DISPLAY}" ]]; then
 else
 	alias vi='vim'
 	alias view='vim -R'
-if
+fi
 
 alias fixdate='sudo ntpdate -sb time.nist.gov'
 
