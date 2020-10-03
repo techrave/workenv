@@ -6,13 +6,21 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias vi='gvim -v'
-alias vim='gvim -v'
-alias view='gvim -v -R'
-alias gview='gvim -R'
+if [[ -z "${DISPLAY}" ]]; then
+	alias vi='gvim -v'
+	alias vim='gvim -v'
+	alias view='gvim -v -R'
+	alias gview='gvim -R'
+else
+	alias vi='vim'
+	alias view='vim -R'
+if
+
 alias fixdate='sudo ntpdate -sb time.nist.gov'
 
+stty -ixon
 set -o vi
+
 export EDITOR=$(which vim)
 export PS1="\[\e[00;33m\]\t\[\e[0m\]\[\e[00;36m\] \[\e[0m\]\[\e[00;36m\]\w\[\e[0m\]\[\e[00;36m\]\n[\[\e[0m\]\[\e[00;32m\]\u\[\e[0m\]\[\e[00;36m\]@\[\e[0m\]\[\e[00;34m\]\h\[\e[0m\]\[\e[00;36m\]] \$? \\$> \[\e[0m\]"
 
